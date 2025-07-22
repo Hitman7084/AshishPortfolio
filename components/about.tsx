@@ -28,7 +28,7 @@ export default function About() {
           className="w-48 h-48 mx-auto relative rounded-full overflow-hidden shadow-lg border-4 border-green-400 bg-gradient-to-br from-green-500/20 to-green-800/10"
         >
           <Image
-            src="/ashish-avatar.png"
+            src="/pic.jpg"
             alt="Ashish Avatar"
             fill
             className="object-cover"

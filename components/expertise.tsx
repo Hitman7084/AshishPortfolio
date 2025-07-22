@@ -1,4 +1,3 @@
-// components/Expertise.tsx
 import { motion } from 'framer-motion';
 import { FaVideo, FaBrain, FaMagic, FaImage, FaRobot, FaTh } from 'react-icons/fa';
 

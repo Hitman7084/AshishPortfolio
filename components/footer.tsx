@@ -1,4 +1,4 @@
-import { FaInstagram, FaYoutube, FaBehance } from 'react-icons/fa';
+import { FaInstagram, FaYoutube, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex space-x-4">
           <a href="#" className="hover:text-green-400 transition"><FaInstagram size={20} /></a>
           <a href="#" className="hover:text-green-400 transition"><FaYoutube size={20} /></a>
-          <a href="#" className="hover:text-green-400 transition"><FaBehance size={20} /></a>
+          <a href="#" className="hover:text-green-400 transition"><FaLinkedin size={20} /></a>
         </div>
       </div>
       <div className="absolute top-0 right-0 w-40 h-40 bg-green-500 rounded-full mix-blend-lighten blur-3xl opacity-10 animate-spin"></div>
