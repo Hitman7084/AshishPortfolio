@@ -1,12 +1,12 @@
 'use client';
 import Hero from '../components/hero';
-import About from '@/components/About';
-import Expertise from '@/components/Expertise';
-import Projects from '@/components/Projects';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import ScrollToTop from '@/components/ScrollToTop';
+import About from '../components/about';
+import Expertise from '../components/expertise';
+import Projects from '../components/projects';
+import Contact from '../components/contact';
+import Footer from '../components/footer';
+import Header from '../components/header';
+import Scroll from '../components/scroll';
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         <Projects />
         <Contact />
         <Footer />
-        <ScrollToTop />
+        <Scroll />
       </main>
     </>
   );
