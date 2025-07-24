@@ -1,9 +1,8 @@
-// components/projects.tsx
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Need to add project data waiting for 
+// Need to add project data waiting for candidate to provide real data
 const sampleProjects = [
   { id: 1, title: 'Instagram Reel Campaign', category: 'video', thumbnail: '/thumbnails/reel1.jpg' },
   { id: 2, title: 'YouTube Cashcow Intro', category: 'video', thumbnail: '/thumbnails/cashcow1.jpg' },
