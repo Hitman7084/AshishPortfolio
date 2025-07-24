@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from 'next/font/google';
 import "./globals.css";
 import PageLoader from "@/components/pageLoader";
+import BackgroundEffects from "@/components/backgroundEffects";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '800'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-black text-white`}>
+        <BackgroundEffects />
         <PageLoader />
         {children}
       </body>
