@@ -17,7 +17,7 @@ export default function Scroll() {
     visible && (
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-400 text-black p-3 rounded-full shadow-lg transition z-50"
+        className="fixed bottom-6 right-6 bg-violet-500 hover:bg-violet-600 text-white p-3 rounded-full shadow-lg transition z-50"
         aria-label="Scroll to top"
       >
         <FaArrowUp />

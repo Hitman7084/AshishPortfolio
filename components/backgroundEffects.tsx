@@ -18,18 +18,16 @@ export default function BackgroundEffects() {
 
   const background = useTransform(
     [mouseX, mouseY],
-    ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, rgba(45, 212, 191, 0.15), transparent 80%)`
+    ([x, y]) => `radial-gradient(600px at ${x}px ${y}px, rgba(139, 92, 246, 0.15), transparent 80%)`
   );
 
   return (
     <>
-      {/* Glare Effect */}
       <motion.div
-        className="fixed top-0 left-0 w-full h-full z-[-1] pointer-events-none"
+        className="fixed top-0 left-0 w-full h-full z-[-3] pointer-events-none"
         style={{ background }}
       />
-      {/* Grain Effect */}
-      <div className="fixed top-0 left-0 w-full h-full z-[-2] pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'url(/noise.svg)' }}></div>
+      <div className="fixed top-0 left-0 w-full h-full z-[-4] pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'url(/noise.svg)' }}></div>
     </>
   );
 }

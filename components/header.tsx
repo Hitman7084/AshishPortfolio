@@ -13,16 +13,39 @@ export default function Header() {
     { name: 'Contact', href: '#contact' }
   ];
 
+  // Custom click handler for smooth scrolling
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    const targetElement = document.querySelector(href);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    // Close the mobile menu after a link is clicked ( works for now )
+    setOpen(false);
+  };
+
   return (
     <header className="fixed top-0 w-full z-50 backdrop-blur bg-black/50 border-b border-white/10">
       <div className="max-w-6xl mx-auto px-6 md:px-16 flex items-center justify-between h-16">
-        <Link href="/" className="text-xl font-bold text-green-400">
+        <Link href="/" className="text-xl font-bold text-violet-400">
           Ashish Kumar
         </Link>
 
+        {/* Desktop Menu */}
         <nav className="hidden md:flex gap-8 text-white font-medium">
           {links.map(link => (
-            <a key={link.name} href={link.href} className="hover:text-green-400 transition">
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className="hover:text-violet-400 transition cursor-pointer"
+            >
               {link.name}
             </a>
           ))}
@@ -43,8 +66,8 @@ export default function Header() {
             <a
               key={link.name}
               href={link.href}
-              className="block py-2 text-white hover:text-green-400"
-              onClick={() => setOpen(false)}
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className="block py-2 text-white hover:text-violet-400 cursor-pointer"
             >
               {link.name}
             </a>

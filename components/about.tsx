@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import InteractiveStarfield from './interactiveStarfield';
 
 export default function About() {
   return (
-    <section id="about" className="py-20 px-6 md:px-16 bg-black relative z-10">
-      <div className="max-w-5xl mx-auto text-center">
+    <section id="about" className="py-20 px-6 md:px-16 bg-black relative z-10 overflow-hidden">
+      
+      {/* The new starfield component as a background layer */}
+      <div className="absolute inset-0 z-0 opacity-50">
+        <InteractiveStarfield />
+      </div>
+
+      {/* Central Content */}
+      <div className="max-w-5xl mx-auto text-center relative z-20">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +33,7 @@ export default function About() {
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="w-48 h-48 mx-auto relative rounded-full overflow-hidden shadow-lg border-4 border-green-400 bg-gradient-to-br from-green-500/20 to-green-800/10"
+          className="w-48 h-48 mx-auto relative rounded-full overflow-hidden shadow-lg border-4 border-violet-400 bg-gradient-to-br from-violet-500/20 to-violet-800/10"
         >
           <Image
             src="/pic.jpg"
@@ -35,8 +43,6 @@ export default function About() {
             loading="lazy"
           />
         </motion.div>
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-green-400 rounded-full mix-blend-lighten blur-3xl opacity-10 animate-pulse"></div>
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-green-500 rounded-full mix-blend-lighten blur-2xl opacity-20 animate-spin"></div>
       </div>
     </section>
   );
