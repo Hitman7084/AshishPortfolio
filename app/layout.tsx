@@ -3,7 +3,8 @@ import { Poppins } from 'next/font/google';
 import "./globals.css";
 import PageLoader from "@/components/pageLoader";
 import BackgroundEffects from "@/components/backgroundEffects";
-import InteractiveStarfield from "@/components/interactiveStarfield"; // Import the starfield
+import InteractiveStarfield from "@/components/interactiveStarfield";
+import CustomCursor from "@/components/customCursor";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '800'] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <BackgroundEffects />
         <InteractiveStarfield /> 
         <PageLoader />
+        <CustomCursor />
         {children}
       </body>
     </html>
