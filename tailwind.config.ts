@@ -8,7 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif']
+        sans: ['Poppins', 'sans-serif'],
+        'serif-display': ['var(--font-playfair-display)', 'serif'],
       },
       colors: {
         neon: '#39FF14',

@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { FaVideo, FaBrain, FaMagic, FaImage, FaRobot, FaTh } from 'react-icons/fa';
+import { FaVideo, FaBrain, FaMagic, FaImage, FaRobot, FaTh, FaSpinner, FaEdit } from 'react-icons/fa';
 
 const expertiseList = [
-  { icon: <FaVideo size={28} />, title: 'Documentary Videos' },
-  { icon: <FaBrain size={28} />, title: 'Cashcow Videos' },
-  { icon: <FaRobot size={28} />, title: 'AI Videos' },
-  { icon: <FaMagic size={28} />, title: 'Reel Editing' },
-  { icon: <FaImage size={28} />, title: 'Thumbnail Designing' },
-  { icon: <FaTh size={28} />, title: 'AI Thumbnails' }
+  { icon: <FaEdit size={50} />, title: 'Video Editing' },
+  { icon: <FaVideo size={50} />, title: 'Motion Graphics' },
+  { icon: <FaRobot size={50} />, title: 'AI Videos' },
+  { icon: <FaMagic size={50} />, title: 'Reel Editing' },
+  { icon: <FaImage size={50} />, title: 'Thumbnail Designing' },
+  { icon: <FaTh size={50} />, title: 'AI Thumbnails' }
 ];
 
 export default function Expertise() {
