@@ -26,7 +26,7 @@ export default function PageLoader() {
     >
       <div className="text-center">
         <div className="animate-spin rounded-full border-t-4 border-b-4 border-white h-16 w-16 mx-auto mb-4"></div>
-        <p className="text-lg font-semibold">Loading B</p> 
+        <p className="text-lg font-semibold">Loading</p> 
       </div>
     </motion.div>
   );
