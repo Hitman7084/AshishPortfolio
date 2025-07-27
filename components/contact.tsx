@@ -34,11 +34,11 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-4xl font-extrabold mb-6"
         >
-          Let’s Work Together
+          Let us Work Together
         </motion.h2>
 
         <p className="mb-12 text-gray-400">
-          Ready to bring your vision to life? Reach out and let's get started.
+          Ready to turn your vision into reality? Contact us and let us begin.
         </p>
 
         <form
