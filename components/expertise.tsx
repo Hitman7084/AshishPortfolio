@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaVideo, FaBrain, FaMagic, FaImage, FaRobot, FaTh, FaSpinner, FaEdit } from 'react-icons/fa';
+import { FaVideo, FaMagic, FaImage, FaRobot, FaTh, FaSpinner, FaEdit } from 'react-icons/fa';
 
 const expertiseList = [
   { icon: <FaEdit size={50} />, title: 'Video Editing' },
