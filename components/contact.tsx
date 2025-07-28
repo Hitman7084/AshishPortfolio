@@ -6,20 +6,24 @@ export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name.trim() || !email.trim() || !message.trim()) {
-      alert("You can't export an empty timeline, champ! Fill out the form first. 🎬😉");
+      setModalMessage("You can't export an empty timeline, Fill out the form first. 🎬😉");
+      setShowModal(true);
       return;
     }
 
     // Simulated send - Replace with actual EmailJS or backend call later
     console.log("Sending message to abc@example.com...", { name, email, message });
-    alert("Message sent! Time to hit render. 🚀");
 
-    // Clear form
+    setModalMessage("Message sent! Time to hit render. 🚀");
+    setShowModal(true);
+
     setName('');
     setEmail('');
     setMessage('');
@@ -74,6 +78,27 @@ export default function Contact() {
           </button>
         </form>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.85 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="bg-gradient-to-br from-violet-500/90 to-purple-700/90 text-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center border border-white/20"
+        >
+          <p className="mb-6 text-lg font-semibold">{modalMessage}</p>
+          <button
+            onClick={() => setShowModal(false)}
+            className="px-6 py-2 bg-white text-violet-700 font-bold rounded-full hover:bg-violet-100 transition"
+          >
+            Got it!
+          </button>
+        </motion.div>
+      </div>
+    )}
     </section>
   );
 }
