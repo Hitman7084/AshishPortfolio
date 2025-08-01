@@ -1,4 +1,3 @@
-'use client';
 import Hero from '../components/hero';
 import About from '../components/about';
 import Expertise from '../components/expertise';
@@ -18,9 +17,9 @@ export default function Home() {
         <Expertise />
         <Projects />
         <Contact />
-        <Footer />
-        <Scroll />
       </main>
+      <Footer />
+      <Scroll />
     </>
   );
 }
