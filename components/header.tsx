@@ -2,16 +2,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { headerLinks } from './content';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-
-  const links = [
-    { name: 'About', href: '#about' },
-    { name: 'Expertise', href: '#expertise' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
-  ];
 
   // Custom click handler for smooth scrolling
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -26,7 +20,7 @@ export default function Header() {
       });
     }
 
-    // Close the mobile menu after a link is clicked ( works for now )
+    // Close the mobile menu after a link is clicked
     setOpen(false);
   };
 
@@ -39,7 +33,7 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex gap-8 text-white font-medium">
-          {links.map(link => (
+          {headerLinks.map(link => (
             <a
               key={link.name}
               href={link.href}
@@ -62,7 +56,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-black border-t border-white/10 px-6 py-4">
-          {links.map(link => (
+          {headerLinks.map(link => (
             <a
               key={link.name}
               href={link.href}

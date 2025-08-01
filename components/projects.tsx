@@ -1,41 +1,10 @@
 'use client';
 
 import { motion, useAnimationControls } from 'framer-motion';
+import Image from 'next/image';
 import { FaPlay, FaFilm } from 'react-icons/fa';
 import { useRef, useState, useEffect } from 'react';
-
-const projects = [
-  {
-    id: 1,
-    title: 'Jealousy spreads fast',
-    description: 'Not every smile is genuine. Share the wrong secret, and you will learn how fast jealousy truly spreads.',
-    duration: '0:18',
-    thumbnail: '/thumbnails/enemy.jpg',
-    preview: '/previews/pro1.mp4',
-    isReel: true,
-    icon: 'keyhole'
-  },
-  {
-    id: 2,
-    title: 'Admission in College',
-    description: 'A dummy reel showcasing the journey of a student getting admitted into college, filled with excitement and challenges.',
-    duration: '0:56',
-    thumbnail: '/thumbnails/admission.jpg',
-    preview: '/previews/pro2.mp4',
-    isReel: true,
-    icon: 'confetti'
-  },
-  {
-    id: 3,
-    title: 'Urban Exploration',
-    description: 'Money is a powerful tool, but it can also be a dangerous game. This cinematic piece explores the allure and risks of wealth.',
-    duration: '0:11',
-    thumbnail: '/thumbnails/money.jpg',
-    preview: '/previews/pro3.mp4',
-    isReel: false,
-    icon: 'gem'
-  },
-];
+import { projects } from './content';
 
 type ProjectVideoPlayerProps = {
   preview: string;
@@ -104,14 +73,11 @@ function ProjectVideoPlayer({ preview, thumbnail, isReel, title }: ProjectVideoP
   const [isLoading, setIsLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
-  // Effect to handle playing once the src is set to a blob URL
   useEffect(() => {
     if (videoSrc && videoRef.current) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(error => {
-          // This catch block handles the interruption error gracefully.
-          // The error is expected if the user clicks pause immediately after play.
           if (error.name !== 'AbortError') {
             console.error("Video play error:", error);
           }
@@ -120,7 +86,6 @@ function ProjectVideoPlayer({ preview, thumbnail, isReel, title }: ProjectVideoP
     }
   }, [videoSrc]);
 
-  // Effect to revoke the object URL to avoid memory leaks
   useEffect(() => {
     return () => {
       if (videoSrc) {
@@ -157,7 +122,7 @@ function ProjectVideoPlayer({ preview, thumbnail, isReel, title }: ProjectVideoP
     onEnded: () => {
       setIsPlaying(false);
       setIsLoading(false);
-      setVideoSrc(null); // Reset src to allow replaying
+      setVideoSrc(null); 
     },
   };
 
@@ -167,10 +132,11 @@ function ProjectVideoPlayer({ preview, thumbnail, isReel, title }: ProjectVideoP
           isReel ? 'aspect-[9/16] mx-auto md:max-w-[300px]' : 'aspect-video'
         } overflow-hidden rounded-xl shadow-2xl bg-black`}
     >
-      <img
+      <Image
         src={thumbnail}
         alt={title}
-        className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 ${isPlaying || isLoading ? 'opacity-0' : 'opacity-100'}`}
+        fill
+        className={`object-cover transition-opacity duration-300 ${isPlaying || isLoading ? 'opacity-0' : 'opacity-100'}`}
       />
       
       {videoSrc && (
@@ -239,7 +205,7 @@ export default function ProjectsShowcase() {
             />
             <div className="w-full md:w-1/2 space-y-4 relative">
                <div className="absolute -top-4 right-0 md:-right-4 z-10">
-                <CreativeIcon iconType={project.icon as 'keyhole' | 'confetti' | 'gem'} />
+                <CreativeIcon iconType={project.icon} />
               </div>
               <h3 className="text-3xl md:text-4xl font-serif font-bold text-violet-300">{project.title}</h3>
               <p className="text-lg text-white/80 leading-relaxed">{project.description}</p>

@@ -1,15 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FaVideo, FaMagic, FaImage, FaRobot, FaTh, FaSpinner, FaEdit } from 'react-icons/fa';
-
-const expertiseList = [
-  { icon: <FaEdit size={50} />, title: 'Video Editing' },
-  { icon: <FaVideo size={50} />, title: 'Motion Graphics' },
-  { icon: <FaRobot size={50} />, title: 'AI Videos' },
-  { icon: <FaMagic size={50} />, title: 'Reel Editing' },
-  { icon: <FaImage size={50} />, title: 'Thumbnail Designing' },
-  { icon: <FaTh size={50} />, title: 'AI Thumbnails' }
-];
+import { expertiseList } from './content';
 
 export default function Expertise() {
   return (
@@ -40,7 +31,7 @@ export default function Expertise() {
                 whileHover={{ scale: 1.2, rotate: [0, 15, -15, 0] }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
-                {item.icon}
+                <item.icon size={50} />
               </motion.div>
               <h3 className="text-xl font-semibold text-white">{item.title}</h3>
             </motion.div>

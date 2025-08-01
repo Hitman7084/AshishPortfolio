@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { contactContent } from './content';
 
 export default function Contact() {
   const [name, setName] = useState('');
@@ -18,7 +19,6 @@ export default function Contact() {
       return;
     }
 
-    // Simulated send - Replace with actual EmailJS or backend call later
     console.log("Sending message to abc@example.com...", { name, email, message });
 
     setModalMessage("Message sent! Time to hit render. 🚀");
@@ -38,11 +38,11 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-4xl font-extrabold mb-6"
         >
-          Let us Work Together
+          {contactContent.title}
         </motion.h2>
 
         <p className="mb-12 text-gray-400">
-          Ready to turn your vision into reality? Contact us and let us begin.
+          {contactContent.paragraph}
         </p>
 
         <form
@@ -79,7 +79,6 @@ export default function Contact() {
         </form>
       </div>
 
-      {/* Modal */}
       {showModal && (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
         <motion.div

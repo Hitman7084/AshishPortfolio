@@ -1,0 +1,76 @@
+import { FaVideo, FaMagic, FaImage, FaRobot, FaTh, FaEdit } from 'react-icons/fa';
+
+// content.ts
+
+// For Header
+export const headerLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Expertise', href: '#expertise' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' }
+];
+
+// For Hero section
+export const heroContent = {
+    name: "Ashish Kumar",
+    title: "Creative Video Editor | Graphic Designer",
+    subtitle: "Generated 10M+ Views on Social Media • Worked With 100+ Influencers and Agencies"
+};
+
+// For About section
+export const aboutContent = {
+    title: "Creative Video Editor and Graphic Designer",
+    paragraph: "With over 10 million views generated across social media and collaborations with 100+ influencers and agencies, I craft compelling video content and striking graphics that engage and convert."
+};
+
+// For Expertise section
+export const expertiseList = [
+  { icon: FaEdit, title: 'Video Editing' },
+  { icon: FaVideo, title: 'Motion Graphics' },
+  { icon: FaRobot, title: 'AI Videos' },
+  { icon: FaMagic, title: 'Reel Editing' },
+  { icon: FaImage, title: 'Thumbnail Designing' },
+  { icon: FaTh, title: 'AI Thumbnails' }
+];
+
+
+// For Projects section
+export const projects = [
+  {
+    id: 1,
+    title: 'Jealousy spreads fast',
+    description: 'Not every smile is genuine. Share the wrong secret, and you will learn how fast jealousy truly spreads.',
+    duration: '0:18',
+    thumbnail: '/thumbnails/enemy.jpg',
+    preview: '/previews/pro1.mp4',
+    isReel: true,
+    icon: 'keyhole' as const
+  },
+  {
+    id: 2,
+    title: 'Admission in College',
+    description: 'A dummy reel showcasing the journey of a student getting admitted into college, filled with excitement and challenges.',
+    duration: '0:56',
+    thumbnail: '/thumbnails/admission.jpg',
+    preview: '/previews/pro2.mp4',
+    isReel: true,
+    icon: 'confetti' as const
+  },
+  {
+    id: 3,
+    title: 'Urban Exploration',
+    description: 'Money is a powerful tool, but it can also be a dangerous game. This cinematic piece explores the allure and risks of wealth.',
+    duration: '0:11',
+    thumbnail: '/thumbnails/money.jpg',
+    preview: '/previews/pro3.mp4',
+    isReel: false,
+    icon: 'gem' as const
+  },
+];
+
+
+// For Contact section
+export const contactContent = {
+    title: "Let us Work Together",
+    paragraph: "Ready to turn your vision into reality? Contact us and let us begin."
+};

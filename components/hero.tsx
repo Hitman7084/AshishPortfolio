@@ -2,9 +2,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
+import { heroContent } from './content';
 
 export default function Hero() {
-  const name = "Ashish Kumar";
   const sentence = {
     hidden: { opacity: 0 },
     visible: {
@@ -42,7 +42,7 @@ export default function Hero() {
           animate="visible"
           className="text-5xl md:text-8xl font-extrabold tracking-tighter"
         >
-          {name.split("").map((char, index) => (
+          {heroContent.name.split("").map((char, index) => (
             <motion.span key={char + "-" + index} variants={letter} className="inline-block">
               {char === " " ? "\u00A0" : char}
             </motion.span>
@@ -55,7 +55,7 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 0.8 }}
           className="text-xl md:text-3xl font-semibold mt-4 text-violet-400"
         >
-          Creative Video Editor | Graphic Designer
+          {heroContent.title}
         </motion.h2>
 
         <motion.p
@@ -64,7 +64,7 @@ export default function Hero() {
           transition={{ delay: 1.8, duration: 1 }}
           className="mt-4 text-sm md:text-base text-gray-300 max-w-xl"
         >
-          Generated 10M+ Views on Social Media • Worked With 100+ Influencers and Agencies
+          {heroContent.subtitle}
         </motion.p>
         
         <motion.div
