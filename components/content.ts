@@ -48,8 +48,8 @@ export const projects = [
   },
   {
     id: 2,
-    title: 'Admission in College',
-    description: 'A dummy reel showcasing the journey of a student getting admitted into college, filled with excitement and challenges.',
+    title: 'Admission',
+    description: 'Admission is a journey filled with excitement and anticipation. Let us help you make it memorable.',
     duration: '0:56',
     thumbnail: '/thumbnails/admission.jpg',
     preview: '/previews/pro2.mp4',
@@ -58,8 +58,8 @@ export const projects = [
   },
   {
     id: 3,
-    title: 'Urban Exploration',
-    description: 'Money is a powerful tool, but it can also be a dangerous game. This cinematic piece explores the allure and risks of wealth.',
+    title: 'Money',
+    description: 'Money is a powerful tool, but it can also be a dangerous game.',
     duration: '0:11',
     thumbnail: '/thumbnails/money.jpg',
     preview: '/previews/pro3.mp4',
