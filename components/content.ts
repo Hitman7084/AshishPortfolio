@@ -61,7 +61,7 @@ export const projects = [
     duration: '0:11',
     thumbnail: '/thumbnails/money.jpg',
     preview: '/previews/pro3.mp4',
-    isReel: false,
+    isReel: true,
     icon: 'gem' as const
   },
 ];
