@@ -1,7 +1,5 @@
 import { FaVideo, FaMagic, FaImage, FaRobot, FaTh, FaEdit } from 'react-icons/fa';
 
-// content.ts
-
 // For Header
 export const headerLinks = [
     { name: 'About', href: '#about' },
@@ -48,8 +46,8 @@ export const projects = [
   },
   {
     id: 2,
-    title: 'Admission',
-    description: 'Admission is a journey filled with excitement and anticipation. Let us help you make it memorable.',
+    title: 'Artificial Intelligence',
+    description: 'Artificial Intelligence is not about replacing human thinking, but about amplifying it—turning imagination into possibility.',
     duration: '0:56',
     thumbnail: '/thumbnails/admission.jpg',
     preview: '/previews/pro2.mp4',
@@ -59,7 +57,7 @@ export const projects = [
   {
     id: 3,
     title: 'Money',
-    description: 'Money is a powerful tool, but it can also be a dangerous game.',
+    description: 'Money grows fastest where patience, skill, and consistency meet.',
     duration: '0:11',
     thumbnail: '/thumbnails/money.jpg',
     preview: '/previews/pro3.mp4',
