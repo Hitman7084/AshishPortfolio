@@ -21,18 +21,28 @@ export default function Contact() {
     }
 
     try {
+      // Type-safe environment variable checks
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+      const receiveEmail = process.env.NEXT_PUBLIC_RECIEVE_EMAIL;
+
+      if (!serviceId || !templateId || !userId || !receiveEmail) {
+        throw new Error('Missing required EmailJS configuration');
+      }
+
       const templateParams = {
         from_name: name,
         reply_to: email,
-        to_email: process.env.NEXT_PUBLIC_RECIEVE_EMAIL,
+        to_email: receiveEmail,
         message: message
       };
 
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        serviceId,
+        templateId,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+        userId
       );
 
       setModalMessage("Message sent! Time to hit render. 🚀");
@@ -42,15 +52,18 @@ export default function Contact() {
       setName('');
       setEmail('');
       setMessage('');
-    } catch (error: any) {
-      console.error('Failed to send message:', {
-        error,
+    } catch (error) {
+      console.error('Failed to send message:', error instanceof Error ? {
         message: error.message,
         stack: error.stack
-      });
+      } : 'Unknown error');
       
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Unknown error occurred';
+
       setModalMessage(
-        error.message === 'Invalid response from server'
+        errorMessage === 'Invalid response from server'
           ? "Server error. Please try again later. 🔄"
           : "Failed to send message. Please try again. 🔄"
       );
