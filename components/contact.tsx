@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { contactContent } from './content';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [name, setName] = useState('');
@@ -10,7 +11,7 @@ export default function Contact() {
   const [modalMessage, setModalMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name.trim() || !email.trim() || !message.trim()) {
@@ -19,14 +20,55 @@ export default function Contact() {
       return;
     }
 
-    console.log("Sending message to abc@example.com...", { name, email, message });
+    try {
+      // Type-safe environment variable checks
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+      const receiveEmail = process.env.NEXT_PUBLIC_RECIEVE_EMAIL;
 
-    setModalMessage("Message sent! Time to hit render. 🚀");
-    setShowModal(true);
+      if (!serviceId || !templateId || !userId || !receiveEmail) {
+        throw new Error('Missing required EmailJS configuration');
+      }
 
-    setName('');
-    setEmail('');
-    setMessage('');
+      const templateParams = {
+        from_name: name,
+        reply_to: email,
+        to_email: receiveEmail,
+        message: message
+      };
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        userId
+      );
+
+      setModalMessage("Message sent! Time to hit render. 🚀");
+      setShowModal(true);
+
+      // Clear form on success
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (error) {
+      console.error('Failed to send message:', error instanceof Error ? {
+        message: error.message,
+        stack: error.stack
+      } : 'Unknown error');
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Unknown error occurred';
+
+      setModalMessage(
+        errorMessage === 'Invalid response from server'
+          ? "Server error. Please try again later. 🔄"
+          : "Failed to send message. Please try again. 🔄"
+      );
+      setShowModal(true);
+    }
   };
 
   return (
