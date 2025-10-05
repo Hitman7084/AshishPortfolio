@@ -10,7 +10,7 @@ export default function Contact() {
   const [modalMessage, setModalMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name.trim() || !email.trim() || !message.trim()) {
@@ -19,14 +19,49 @@ export default function Contact() {
       return;
     }
 
-    console.log("Sending message to abc@example.com...", { name, email, message });
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    setModalMessage("Message sent! Time to hit render. 🚀");
-    setShowModal(true);
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        throw new Error('Invalid response from server');
+      }
 
-    setName('');
-    setEmail('');
-    setMessage('');
+      if (!response.ok) {
+        console.error('Server error:', data);
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setModalMessage("Message sent! Time to hit render. 🚀");
+      setShowModal(true);
+
+      // Clear form on success
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (error: any) {
+      console.error('Failed to send message:', {
+        error,
+        message: error.message,
+        stack: error.stack
+      });
+      
+      setModalMessage(
+        error.message === 'Invalid response from server'
+          ? "Server error. Please try again later. 🔄"
+          : "Failed to send message. Please try again. 🔄"
+      );
+      setShowModal(true);
+    }
   };
 
   return (
