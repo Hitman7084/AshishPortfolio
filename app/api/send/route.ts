@@ -1,12 +1,28 @@
-import { Resend } from 'resend';
+// Function to send email using EmailJS REST API
+async function sendEmailJS(templateParams: FormData, serviceId: string, templateId: string, userId: string) {
+  const url = 'https://api.emailjs.com/api/v1.0/email/send';
+  const data = {
+    service_id: serviceId,
+    template_id: templateId,
+    user_id: userId,
+    template_params: templateParams,
+  };
 
-const apiKey = process.env.RESEND_API_KEY;
-const senderEmail = process.env.SEND_EMAIL;
-const recipientEmail = process.env.RECIEVE_EMAIL;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
 
-const senderEmailStr = senderEmail as string;
-const recipientEmailStr = recipientEmail as string;
-const resend = new Resend(apiKey);
+  if (!response.ok) {
+    const errorData = await response.text();
+    throw new Error(`EmailJS API error: ${errorData}`);
+  }
+
+  return response;
+}
 
 interface EmailRequest {
   name: string;
@@ -14,11 +30,26 @@ interface EmailRequest {
   message: string;
 }
 
+type FormData = {
+  from_name: string;
+  reply_to: string;
+  to_email: string;
+  message: string;
+}
+
+const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID || '';
+const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_USER_ID = process.env.EMAILJS_USER_ID || '';
+const RECIEVE_EMAIL = process.env.RECIEVE_EMAIL || '';
+
+if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_USER_ID || !RECIEVE_EMAIL) {
+  throw new Error('Missing required EmailJS environment variables');
+}
+
 export async function POST(req: Request) {
   try {
-    // Add request content type check
     const contentType = req.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
+    if (!contentType?.includes('application/json')) {
       return new Response(
         JSON.stringify({ error: 'Content-Type must be application/json' }),
         { 
@@ -28,11 +59,11 @@ export async function POST(req: Request) {
       );
     }
 
-    let body;
+    // Parse request body
+    let body: EmailRequest;
     try {
       body = await req.json();
     } catch (e) {
-      console.error('JSON parse error:', e);
       return new Response(
         JSON.stringify({ error: 'Invalid JSON in request body' }),
         { 
@@ -42,15 +73,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const { name, email, message } = body as EmailRequest;
-    
-    // Validate all required fields
+    const { name, email, message } = body;
+
+    // Validate fields
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return new Response(
-        JSON.stringify({ 
-          error: 'Missing required fields: name, email, and message are required.',
-          received: { name, email, message }
-        }),
+        JSON.stringify({ error: 'All fields are required' }),
         { 
           status: 400,
           headers: { 'Content-Type': 'application/json' }
@@ -58,23 +86,24 @@ export async function POST(req: Request) {
       );
     }
 
-    const subject = `New message from ${name}`;
-    const html = `<p>You have received a new message from the contact form.</p>
-                  <p><strong>Name:</strong> ${name}</p>
-                  <p><strong>Email:</strong> ${email}</p>
-                  <p><strong>Message:</strong></p>
-                  <p>${message}</p>`;
+    // Prepare EmailJS parameters
+    const templateParams: FormData = {
+      from_name: name,
+      reply_to: email,
+      to_email: RECIEVE_EMAIL,
+      message: message
+    };
 
-    const result = await resend.emails.send({
-      from: senderEmailStr,
-      to: recipientEmailStr,
-      subject,
-      html,
-      replyTo: email
-    });
+    // Send email using EmailJS REST API
+    await sendEmailJS(
+      templateParams,
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      EMAILJS_USER_ID
+    );
 
     return new Response(
-      JSON.stringify({ success: true, result }),
+      JSON.stringify({ success: true }),
       { 
         status: 200,
         headers: { 'Content-Type': 'application/json' }
@@ -82,17 +111,10 @@ export async function POST(req: Request) {
     );
   } catch (error: any) {
     console.error('Email send error:', error);
-    // Log detailed error for debugging
-    console.error('Detailed error:', {
-      message: error.message,
-      stack: error.stack,
-      cause: error.cause
-    });
-
     return new Response(
       JSON.stringify({ 
         error: 'Failed to send email',
-        message: error.message
+        message: error.message 
       }),
       { 
         status: 500,
