@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
         <p className="text-sm">© 2025 Ashish Kumar. All rights reserved.</p>
         <div className="flex space-x-4">
-          <a href="#" className="hover:text-violet-400 transition"><FaInstagram size={30} /></a>
+          <a href="https://www.instagram.com/ashishh_0.45/" className="hover:text-violet-400 transition"><FaInstagram size={30} /></a>
           <a href="https://www.linkedin.com/in/ashish-kumar-508940312/" className="hover:text-violet-400 transition"><FaLinkedin size={30} /></a>
         </div>
       </div>
