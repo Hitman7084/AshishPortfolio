@@ -31,7 +31,6 @@ export const expertiseList = [
   { icon: FaTh, title: 'AI Thumbnails' }
 ];
 
-
 // For Projects section
 export const projects = [
   {
@@ -65,7 +64,6 @@ export const projects = [
     icon: 'gem' as const
   },
 ];
-
 
 // For Contact section
 export const contactContent = {
