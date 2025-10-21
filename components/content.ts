@@ -38,7 +38,7 @@ export const projects = [
     title: 'Jealousy spreads fast',
     description: 'Not every smile is genuine. Share the wrong secret, and you will learn how fast jealousy truly spreads.',
     duration: '0:18',
-    thumbnail: '/thumbnails/enemy.jpg',
+    thumbnail: '/thumbnails/lawsOfPower.jpg',
     preview: '/previews/pro1.mp4',
     isReel: true,
     icon: 'keyhole' as const
@@ -48,7 +48,7 @@ export const projects = [
     title: 'Artificial Intelligence',
     description: 'Artificial Intelligence is not about replacing human thinking, but about amplifying it—turning imagination into possibility.',
     duration: '0:56',
-    thumbnail: '/thumbnails/admission.jpg',
+    thumbnail: '/thumbnails/artificial.jpg',
     preview: '/previews/pro2.mp4',
     isReel: true,
     icon: 'confetti' as const
